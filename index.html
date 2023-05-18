@@ -4,8 +4,39 @@
 	<meta charset="utf-8">
 	<title>Portfolio galerija</title>
 	<script src="s.js"></script>
-</head>
-<body>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Josefin+Sans:100,100i,300,300i,400">
+	<link rel="stylesheet" href="stilius.css">
+	<meta name="description" content="Portfolio galerija">
+	<script>
 
+		const kalbos = { LT: 'EN', EN: 'LT' }
+
+		function kalba(l) {
+			const elementai = qa('[' + l + ']')
+			elementai.forEach(el => {
+				t(el, ag(el, l))
+			})
+			var nauja_kalba = kalbos[l]
+			t(e('lang'), nauja_kalba)
+			a(e('lang'), 'onclick', 'kalba("' + nauja_kalba + '")')
+
+		}
+
+	</script>
+</head>
+<body style="background: url(fonas.jpg);">
+	<div style="display: flex;">
+		<a class="nuoroda" href="mes/index.html" lt="Mes" en="About us">Mes</a> 
+		<a class="nuoroda" href="kontaktai" lt="Kontaktai" en="Contacts">Kontaktai</a>
+		<div class="nuoroda" style="display: inline-block; margin-left: auto;" id="lang" onclick="kalba('EN')">EN</div>
+	</div>
+	<div style="text-align: center; margin-top: 1em;">
+		<img src="portfolio-logo.svg">
+	</div>
+	<div style="display: flex; justify-content: center; margin-top: 1em;">
+		<a class="nuoroda" href="galerija" lt="Galerija" en="Gallery">Galerija</a>
+		<a class="nuoroda" href="kavine" lt="Kavinė" en="Cafe">Kavinė</a>
+		<a class="nuoroda" href="nuoma" lt="Nuoma" en="Rent">Nuoma</a>
+	</div>
 </body>
 </html>

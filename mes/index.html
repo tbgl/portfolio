@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Portfolio galerija</title>
+	<script src="s.js"></script>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Josefin+Sans:100,100i,300,300i,400">
+	<link rel="stylesheet" href="../stilius.css">
+	<meta name="description" content="Portfolio galerija">
+</head>
+<body>
+	<div style="display: flex;">
+		<a class="tarpas1" href="mes/index.html" lt="Mes" en="About us">Mes</a> 
+		<a class="tarpas1" href="kontaktai" lt="Kontaktai" en="Contacts">Kontaktai</a>
+		<div class="tarpas1" style="display: inline-block; margin-left: auto;" id="lang" onclick="kalba('EN')">EN</div>
+	</div>
+
+	<script>
+
+		const kalbos = { LT: 'EN', EN: 'LT' }
+
+		function kalba(l) {
+			const elementai = qa('[' + l + ']')
+			elementai.forEach(el => {
+				t(el, ag(el, l))
+			})
+			var nauja_kalba = kalbos[l]
+			t(e('lang'), nauja_kalba)
+			a(e('lang'), 'onclick', 'kalba("' + nauja_kalba + '")')
+
+		}
+
+	</script>
+</body>
+</html>

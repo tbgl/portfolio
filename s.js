@@ -1,6 +1,6 @@
 function e(id) { return document.getElementById(id) }
-function show(el) { a(el, 'hidden', false }
-function hide(el) { a(el, 'hidden', true }
+function show(el) { a(el, 'hidden', false ) }
+function hide(el) { a(el, 'hidden', true ) }
 function q(query) { return document.querySelector(query) }
 function qa(query) { return document.querySelectorAll(query) }
 function qe(el, query) { return el.querySelector(query) }
