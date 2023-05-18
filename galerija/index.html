@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-database-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore-compat.js"></script>
 	<meta charset="utf-8">
 	<title>Portfolio galerija</title>
 	<script src="../s.js"></script>
@@ -24,19 +27,66 @@
 
 	</script>
 </head>
-<body style="background: url(fonas.jpg);">
+<body>
 	<div style="display: flex;">
-		<a class="nuoroda" href="/mes" lt="Mes" en="About us">Mes</a> 
-		<a class="nuoroda" href="/kontaktai" lt="Kontaktai" en="Contacts">Kontaktai</a>
+		<a class="nuoroda" href="mes/index.html" lt="Mes" en="About us">Mes</a> 
+		<a class="nuoroda" href="kontaktai/index.html" lt="Kontaktai" en="Contacts">Kontaktai</a>
 		<div class="nuoroda" style="display: inline-block; margin-left: auto;" id="lang" onclick="kalba('EN')">EN</div>
 	</div>
 	<div style="text-align: center; margin-top: 1em;">
-		<img src="../portfolio-logo.svg">
+		<a href="/"><img src="../portfolio-logo.svg"></a>
 	</div>
 	<div style="display: flex; justify-content: center; margin-top: 1em;">
-		<a class="nuoroda" href="/galerija" lt="Galerija" en="Gallery">Galerija</a>
-		<a class="nuoroda" href="/kavine" lt="Kavinė" en="Cafe">Kavinė</a>
-		<a class="nuoroda" href="/nuoma" lt="Nuoma" en="Rent">Nuoma</a>
+		<a class="nuoroda" href="galerija/index.html" lt="Galerija" en="Gallery">Galerija</a>
+		<a class="nuoroda" href="kavine/index.html" lt="Kavinė" en="Cafe">Kavinė</a>
+		<a class="nuoroda" href="nuoma/index.html" lt="Nuoma" en="Rent">Nuoma</a>
 	</div>
+	<main>
+		<div class="tekstas" lt="Organizuojamos parodos užpildo erdvę galimybe. Galimybe atrasti netikėtus jausmus, patirit naujus vidinius atradimus. Menas it fonas arbata besimėgaujančiam lankytojui, menas it pirmo plano įvykis amžinam ieškotojui. Siekiame, kad mūsų galerijoje kultūra ateitų su aistra, jautrumu, improvizacija ir staigmena." en="Our organized exhibitions fill in the space with Opportunity. An opportunity to encounter unexpected feelings, new inner findings and fascinating perceptions. Art acts as an enigmatic background for those sipping tea in a café, it also unarguably fulfills the foreground’s role for the eternal explorers. We seek our gallery to be a place where culture is absorbed with passion, care, improvisation, surprise.">Organizuojamos parodos užpildo erdvę galimybe. Galimybe atrasti netikėtus jausmus, patirit naujus vidinius atradimus. Menas it fonas arbata besimėgaujančiam lankytojui, menas it pirmo plano įvykis amžinam ieškotojui. Siekiame, kad mūsų galerijoje kultūra ateitų su aistra, jautrumu, improvizacija ir staigmena.
+		</div>
+
+		<div id="parodos"></div>
+	</main>
+
+	<script>
+		const firebaseConfig = {
+		  apiKey: "AIzaSyDWBOatLdSAzj-ac0QD6G6iQrqk3y1R1ok",
+		  authDomain: "portfolio-birzai.firebaseapp.com",
+		  databaseURL: "https://portfolio-birzai.firebaseio.com",
+		  projectId: "portfolio-birzai",
+		  storageBucket: "portfolio-birzai.appspot.com",
+		  messagingSenderId: "656953127594",
+		  appId: "1:656953127594:web:2df78d3ef4a1933c2496d3"
+		};
+
+        firebase.initializeApp(firebaseConfig)
+        const db = firebase.database()
+        const fs = firebase.firestore()
+
+        const parodu_elementas = e('parodos')
+
+        fs.collection('shows').orderBy('date')
+        .get()
+    	.then((snap) => {
+	        snap.forEach((doc) => {
+	        	var paroda = doc.data()
+            	add(parodu_elementas, ce({
+            		cl: 'paroda',
+            		c: [
+	            		{	cl: 'nuotrauka',
+	            			e: 'img',
+	            			a: { src: paroda.images[0] }
+	            		},
+	            		{
+	            			cl: 'aprasymas',
+	            			c: [
+		            			{ cl: 'pavadinimas', t: paroda.title }
+	            			]
+	            		}
+            		]
+            	}))
+	        });
+	    })
+	</script>
 </body>
 </html>
